@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+
+@font-face {
+  font-family: 'AlbertSans';
+  src: local('AlbertSans'), url(./assets/Fonts/AlbertSans.ttf) format('ttf');
+}
+
+@tailwind utilities;
