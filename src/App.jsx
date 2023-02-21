@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router';
 import Background from './Components/Background'
 import Landing from './Pages/Landing'
 import Result from './Pages/Result'
+import cors from 'cors'
 
 export const AppContext = createContext();
 
@@ -12,11 +13,11 @@ function App() {
   const [ticker, setTicker] = useState();
   const apiUrl = import.meta.env.API;
 
-  useEffect(() => {
-    window.process = {
-      ...window.process,
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.process = {
+  //     ...window.process,
+  //   };
+  // }, []);
 
   return (
     <div data-theme={theme} className="relative overflow-hidden h-screen">
