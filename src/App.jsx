@@ -13,12 +13,6 @@ function App() {
   const [ticker, setTicker] = useState();
   const apiUrl = import.meta.env.API;
 
-  // useEffect(() => {
-  //   window.process = {
-  //     ...window.process,
-  //   };
-  // }, []);
-
   return (
     <div data-theme={theme} className="relative overflow-hidden h-screen">
       <div className="absolute h-screen w-screen">
