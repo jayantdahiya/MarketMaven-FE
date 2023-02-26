@@ -1,6 +1,7 @@
 import React, {useState, createContext, useEffect} from 'react'
 import { Route, Routes } from 'react-router';
 
+import bg from './assets/SVG/circuit-board.svg'
 import Landing from './Pages/Landing'
 import Result from './Pages/Result'
 
@@ -12,15 +13,22 @@ function App() {
   const [responseData, setResponseData] = useState();
 
   return (
-    <div data-theme={theme} className="relative overflow-hidden h-screen">
-      <AppContext.Provider 
-      value={{
-        ticker,
-        setTicker,
-        setTheme,
-        responseData,
-        setResponseData
-      }}>
+    <div
+      data-theme={theme}
+      className="relative overflow-hidden h-screen"
+      style={{
+        backgroundImage: `url(${bg})`,
+      }}
+    >
+      <AppContext.Provider
+        value={{
+          ticker,
+          setTicker,
+          setTheme,
+          responseData,
+          setResponseData,
+        }}
+      >
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/result" element={<Result />} />

@@ -50,7 +50,7 @@ function PredictForm() {
   };
 
   return (
-    <div className="card w-96 bg-base-100 shadow-2xl border-3 bg-transparent bg-opacity-90">
+    <div className="card w-96 bg-base-100 shadow-2xl border-2 border-black">
       <div className="card-body">
         <h2 className="card-title text-2xl">Forcast your stock here!</h2>
         <p className="text-sm text-gray-600">
