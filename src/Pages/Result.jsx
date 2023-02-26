@@ -1,48 +1,33 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { AppContext } from '../App';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+import { AppContext } from "../App";
+import LineChart from '../Components/LineChart';
 
 function Result() {
-  const {ticker, apiUrl} = useContext(AppContext);
-  const [responseData, setResponseData] = useState();
-  console.log(apiUrl)
-
-  // const fetchPredictions = async() => {
-  //   if(ticker) {
-  //    var bodyData = JSON.stringify({
-  //      ticker: ticker,
-  //    })
-  //  }
-
-  //  var config = {
-  //    method: "get",
-  //    url: "https://68a5-2405-201-5801-982c-3ef8-62ff-fe06-c3d1.in.ngrok.io/Prophet?ticker=AAPL",
-  //    headers: {
-  //      "Access-Control-Allow-Origin": "*",
-  //      "Content-Type": "application/json",
-  //    },
-  //  };
-
-  //  axios(config)
-  //    .then(function (response) {
-  //      console.log(JSON.stringify(response.data));
-  //    })
-  //    .catch(function (error) {
-  //      console.log(error);
-  //    });
-  // }
+  const { ticker, setResponseData, responseData } = useContext(AppContext);
+  let navigate = useNavigate();
 
   useEffect(() => {
-    fetchPredictions()
-    console.log('Predicting.....')
+    if(!ticker){
+      navigate('/')
+      alert('Enter a ticker first!')
+    }
   }, [])
-
-
-  return (
-    <div>
-      Result
-    </div>
-  )
+  
+  if (responseData) {
+    return (
+      <div className="h-[350px] w-[700px] border-2 bg-base-100 shadow-2xl">
+        <LineChart />
+      </div>
+    );
+  } else {
+    return (
+      <div className="h-[350px] w-[700px] border-2 flex justify-center bg-base-300 shadow-2xl">
+        <p className="my-auto">Loading....</p>
+      </div>
+    );
+  }
 }
 
 export default Result

@@ -1,23 +1,56 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router';
+import axios from "axios";
+
 import { AppContext } from '../App';
 
 function PredictForm() {
-  const {ticker, setTicker} = useContext(AppContext);
+  const {ticker, setTicker, responseData, setResponseData} = useContext(AppContext);
+  const apiUrl = import.meta.env.API_URL;
+
   let navigate = useNavigate();
   const [tickerError, setTickerError] = useState(false);
 
   const handlePredict = () => {
-    if(ticker == ''){
+    if(!ticker){
       setTickerError(true);
       alert('Please enter a valid ticker name');
     }
-    console.log(ticker)
+    fetchPredictions()
     navigate('/result')
   }
 
+  const fetchPredictions = async () => {
+    console.log("Fetch Predictions Triggered");
+      if (ticker) {
+        console.log("ticker found: ", ticker);
+        var config = {
+          method: "GET",
+          url: "http://54.168.183.197/Prophet",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+          params: {
+            ticker: ticker,
+          },
+        };
+        try {
+          await axios(config).then((response) =>
+            setResponseData(response.data)
+          );
+        } catch (error) {
+          console.log(error);
+          alert(`Axios Error: ${error}`, error.data);
+          navigate('/');
+        }
+      } else {
+        console.log("Please enter a ticker symbol");
+      }
+  };
+
   return (
-    <div className="card w-96 bg-base-100 shadow-2xl border-2">
+    <div className="card w-96 bg-base-100 shadow-2xl border-3 bg-transparent bg-opacity-90">
       <div className="card-body">
         <h2 className="card-title text-2xl">Forcast your stock here!</h2>
         <p className="text-sm text-gray-600">
