@@ -21,11 +21,12 @@ function LineChart() {
           enabled: true,
         },
       },
+      colors: ["#0C37FA"],
       dataLabels: {
         enabled: false,
       },
       markers: {
-        size: [4,4],
+        size: [4, 4],
       },
       stroke: {
         curve: "straight",
@@ -37,11 +38,11 @@ function LineChart() {
       grid: {
         row: {
           colors: ["#f3f3f3", "transparent"],
-          opacity: 1,
+          opacity: 0.5,
         },
       },
       xaxis: {
-        type: 'datetime',
+        type: "datetime",
         categories: Object.keys(chartData).map((key) =>
           new Intl.DateTimeFormat("en-US", {
             year: "numeric",
@@ -74,14 +75,14 @@ function LineChart() {
     );
 
   return (
-    <Chart 
-    type="line" 
-    height='100%'
-    width='100%'
-    series={series}
-    options={options}
-     />
-  )
+    <Chart
+      type="line"
+      height="100%"
+      width="100%"
+      series={series}
+      options={options}
+    />
+  );
 }
 
 export default LineChart

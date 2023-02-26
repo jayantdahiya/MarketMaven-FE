@@ -5,7 +5,7 @@ import axios from "axios";
 import { AppContext } from '../App';
 
 function PredictForm() {
-  const {ticker, setTicker, responseData, setResponseData} = useContext(AppContext);
+  const {ticker, setTicker, setResponseData} = useContext(AppContext);
   const apiUrl = import.meta.env.API_URL;
 
   let navigate = useNavigate();
@@ -26,7 +26,7 @@ function PredictForm() {
         console.log("ticker found: ", ticker);
         var config = {
           method: "GET",
-          url: "http://54.168.183.197/Prophet",
+          url: import.meta.env.VITE_API_URL,
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",

@@ -17,14 +17,20 @@ function Result() {
   
   if (responseData) {
     return (
-      <div className="h-[350px] w-[700px] border-2 bg-base-100 shadow-2xl">
-        <LineChart />
+      <div className="flex justify-center h-screen w-screen">
+        <div className="h-[350px] w-[700px] border-2 bg-base-100 shadow-2xl my-auto">
+          <LineChart />
+        </div>
       </div>
     );
   } else {
     return (
-      <div className="h-[350px] w-[700px] border-2 flex justify-center bg-base-300 shadow-2xl">
-        <p className="my-auto">Loading....</p>
+      <div className="flex justify-center h-screen w-screen">
+        <div className="h-[350px] w-[700px] border-2 bg-base-300 shadow-2xl my-auto flex animate-pulse">
+          <div className="m-auto text-black">
+            Loading predictions...
+          </div>
+        </div>
       </div>
     );
   }
