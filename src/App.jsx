@@ -1,6 +1,5 @@
 import React, {useState, createContext, useEffect} from 'react'
 import { Route, Routes } from 'react-router';
-import axios from "axios";
 
 import Landing from './Pages/Landing'
 import Result from './Pages/Result'

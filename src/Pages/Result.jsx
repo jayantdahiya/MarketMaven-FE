@@ -26,9 +26,9 @@ function Result() {
   } else {
     return (
       <div className="flex justify-center h-screen w-screen">
-        <div className="h-[350px] w-[700px] border-2 bg-base-300 shadow-2xl my-auto flex animate-pulse">
-          <div className="m-auto text-black">
-            Loading predictions...
+        <div className="h-[350px] w-[700px] border-2 shadow-2xl my-auto flex bg-base-200">
+          <div className="m-auto">
+            <button className="btn loading disabled bg-base-200 text-black border-none">loading predictions...</button>
           </div>
         </div>
       </div>
