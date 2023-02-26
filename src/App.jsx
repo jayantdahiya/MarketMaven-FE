@@ -2,7 +2,6 @@ import React, {useState, createContext, useEffect} from 'react'
 import { Route, Routes } from 'react-router';
 import axios from "axios";
 
-import Background from './Components/Background'
 import Landing from './Pages/Landing'
 import Result from './Pages/Result'
 
@@ -15,9 +14,6 @@ function App() {
 
   return (
     <div data-theme={theme} className="relative overflow-hidden h-screen">
-      <div className="absolute h-screen w-screen">
-        <Background />
-      </div>
       <AppContext.Provider 
       value={{
         ticker,
