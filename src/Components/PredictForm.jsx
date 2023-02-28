@@ -52,14 +52,14 @@ function PredictForm() {
   };
 
   return (
-    <div className="card w-96 bg-base-100 shadow-2xl border-2 border-black">
+    <div className="card w-96 bg-base-100 shadow-2xl">
       <div className="card-body">
         <h2 className="card-title text-2xl">Forcast your stock here!</h2>
         <p className="text-sm text-gray-600">
           Just type in your stock ticker name and select the ML model you want
           to forecast with.
         </p>
-        <div className="card w-full p-4 bg-base-200 border-2 border-gray-400">
+        <div className="card w-full p-4 bg-base-200 border-2 border-gray-300 shadow-xl">
           <div className="card-body">
             <input
               type="text"

@@ -19,6 +19,7 @@
     "react-dom": "^18.2.0",
     "react-particle-backgrounds": "^1.0.4",
     "react-router-dom": "^6.8.1",
+    "react-ts-tradingview-widgets": "^1.0.14",
     "recharts": "^2.4.3"
   },
   "devDependencies": {
