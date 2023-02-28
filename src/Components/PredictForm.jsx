@@ -6,7 +6,7 @@ import { AppContext } from '../App';
 
 function PredictForm() {
   const {ticker, setTicker, setResponseData} = useContext(AppContext);
-  const apiUrl = import.meta.env.API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   let navigate = useNavigate();
   const [tickerError, setTickerError] = useState(false);
@@ -26,7 +26,7 @@ function PredictForm() {
         console.log("ticker found: ", ticker);
         var config = {
           method: "GET",
-          url: import.meta.env.VITE_API_URL,
+          url: apiUrl,
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -36,9 +36,11 @@ function PredictForm() {
           },
         };
         try {
+          console.log('Predicting....')
           await axios(config).then((response) =>
             setResponseData(response.data)
           );
+          console.log('Predicted!')
         } catch (error) {
           console.log(error);
           alert(`Axios Error: ${error}`, error.data);

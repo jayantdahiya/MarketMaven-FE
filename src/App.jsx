@@ -11,7 +11,6 @@ function App() {
   const [theme, setTheme] = useState('corporate');
   const [ticker, setTicker] = useState();
   const [responseData, setResponseData] = useState();
-
   return (
     <div
       data-theme={theme}
