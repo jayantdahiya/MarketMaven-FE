@@ -21,7 +21,7 @@ function Result() {
     }
   }, [])
   
-  if (!responseData) {
+  if (responseData) {
     return (
       <div className="flex flex-col w-screen lg:flex-row justify-center">
         <div className="grid h-96 p-4">

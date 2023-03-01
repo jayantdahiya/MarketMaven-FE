@@ -72,10 +72,7 @@ function PredictForm() {
               onChange={(e) => setTicker(e.target.value.toUpperCase())}
             />
             <select className="select select-primary w-full max-w-xs">
-              <option disabled selected>
-                Select Model
-              </option>
-              <option>FB Prophet</option>
+              <option selected value={'prophet'}>FB Prophet</option>
             </select>
             <div className="card-actions justify-end align-bottom">
               <button className="btn btn-primary" onClick={handlePredict}>
