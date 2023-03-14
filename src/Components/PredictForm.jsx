@@ -7,6 +7,7 @@ import { AppContext } from '../App';
 function PredictForm() {
   const {ticker, setTicker, setResponseData} = useContext(AppContext);
   const apiUrl = import.meta.env.VITE_API_URL;
+  console.log(apiUrl)
 
   let navigate = useNavigate();
   const [tickerError, setTickerError] = useState(false);

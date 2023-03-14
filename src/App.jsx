@@ -11,6 +11,7 @@ function App() {
   const [theme, setTheme] = useState('corporate');
   const [ticker, setTicker] = useState();
   const [responseData, setResponseData] = useState();
+  const [model, setModel] = useState('Prophet');
   return (
     <div
       data-theme={theme}
@@ -23,6 +24,8 @@ function App() {
         value={{
           ticker,
           setTicker,
+          model,
+          setModel,
           setTheme,
           responseData,
           setResponseData,
