@@ -25,13 +25,8 @@ function Result() {
   
   if (responseData) {
     return (
-      <div className="flex flex-row md:flex-row w-3/4 h-full">
-        <div className="basis-1/2 p-8">
-          <div className="h-screen">
-            <CompanyProfile symbol={ticker} height='70vh' />
-          </div>
-        </div>
-        <div className="basis-2/3 p-8">
+      <div className="flex w-screen">
+        <div className="mx-auto p-8 w-full md:w-2/3">
           <div className="bg-base-100 border-2 shadow-xl p-4">
             <div className="h-[35vh]">
               <LineChart />
