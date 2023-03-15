@@ -26,7 +26,7 @@ function Result() {
   if (responseData) {
     return (
       <div className="flex w-screen">
-        <div className="mx-auto p-8 w-full md:w-2/3">
+        <div className="mx-auto p-8 w-full md:w-2/5 lg:w-3/5">
           <div className="bg-base-100 border-2 shadow-xl p-4">
             <div className="h-[35vh]">
               <LineChart />
@@ -67,7 +67,7 @@ function Result() {
               </ul>
             </div>
             <div className="text-right">
-              <button className="btn btn-primary" onClick={handleGoBack}>
+              <button className="btn btn-primary text-white" onClick={handleGoBack}>
                 Go Back
               </button>
             </div>
