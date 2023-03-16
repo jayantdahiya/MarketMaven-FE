@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppContext } from "../App";
 import LineChart from '../Components/LineChart';
-import { CompanyProfile } from 'react-ts-tradingview-widgets';
 
 // import {apiData} from '../Components/API_DATA';
 
@@ -13,6 +12,7 @@ function Result() {
 
   const handleGoBack = async() => {
     setTicker('')
+    setResponseData('')
     navigate('/')
   }
 
