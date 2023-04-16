@@ -7,7 +7,7 @@ import { AppContext } from '../App';
 function LineChart() {
     const {responseData} = useContext(AppContext);
     let chartData = JSON.parse(responseData);
-    console.log('Line Chart Data: ', chartData);
+    // console.log('Line Chart Data: ', chartData);
     const series = [
       {
         name: "Price",
@@ -53,26 +53,28 @@ function LineChart() {
       },
     };
 
-    //Console logs of the api inputs/outputs
+  //Console logs of the api inputs/outputs
 
-    console.log(
-      "Trends: ",
-      Object.keys(chartData).map((key) => chartData[key].trend)
-    );
-    console.log(
-      "Date from api: ",
-      Object.keys(chartData).map((key) => chartData[key].trend)
-    );
-    console.log(
-      "Converted Date: ",
-      Object.keys(chartData).map((key) =>
-        new Intl.DateTimeFormat("en-US", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        }).format(chartData[key].ds)
-      )
-    );
+    // console.log(
+    //   "Trends: ",
+    //   Object.keys(chartData).map((key) => chartData[key].trend)
+    // );
+    // console.log(
+    //   "Date from api: ",
+    //   Object.keys(chartData).map((key) => chartData[key].trend)
+    // );
+    // console.log(
+    //   "Converted Date: ",
+    //   Object.keys(chartData).map((key) =>
+    //     new Intl.DateTimeFormat("en-US", {
+    //       year: "numeric",
+    //       month: "2-digit",
+    //       day: "2-digit",
+    //     }).format(chartData[key].ds)
+    //   )
+    // );
+  
+  // **************************************
 
   return (
     <Chart

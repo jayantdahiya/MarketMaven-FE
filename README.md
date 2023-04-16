@@ -1,2 +1,1 @@
-# stock-predictor-FE
- 
+# MarketMaven Frontend
