@@ -1,7 +1,5 @@
-import { ProfileForm } from "@/components/MainForm";
 import { ModeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
-import { MainForm } from "@/components/MainForm";
+import { Landing } from "@/components/Landing";
 
 export default function Home() {
   return (
@@ -9,7 +7,7 @@ export default function Home() {
       <div className="absolute top-6 right-6">
         <ModeToggle />
       </div>
-      <MainForm />
+      <Landing />
     </main>
   );
 }

@@ -12,12 +12,12 @@ const TickerValidationComponent: React.FC<TickerValidationProps> = ({ tickerName
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${tickerName}&apikey=A0OL0E8LK8LQ3EV1`);
+        const response = await axios.get(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${tickerName}&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`);
         const data = response.data;
 
         // Check if the API response contains valid data indicating a valid ticker
-        setIsValidTicker(data.bestMatches && data.bestMatches.length > 0);
-        onValidationResult(data.bestMatches && data.bestMatches.length > 0);
+        setIsValidTicker(data.bestMatches && data.bestMatches.length > 0.9);
+        onValidationResult(data.bestMatches && data.bestMatches.length > 0.9);
       } catch (error) {
         console.error('Error fetching data:', error);
         setIsValidTicker(false);
