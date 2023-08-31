@@ -128,7 +128,7 @@ export function MainForm() {
                         ? tickerSuggestions.find((ticker) => ticker.value === field.value)
                             ?.label
                         : "Select ticker"}
-                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      <ChevronsUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
@@ -179,7 +179,7 @@ export function MainForm() {
                 </SelectTrigger>
                 <SelectContent>
                   {models.map((model) => (
-                    <SelectItem value={model.value}>
+                    <SelectItem key={model.value} value={model.value}>
                       {model.label}
                     </SelectItem>
                   ))}
