@@ -6,7 +6,8 @@ import { AppContext } from '../App';
 
 function PredictForm() {
   const {ticker, setTicker, setResponseData} = useContext(AppContext);
-  const apiUrl = import.meta.env.VITE_APP_URL;
+  // const apiUrl = import.meta.env.VITE_APP_URL;
+  const apiUrl = 'http://127.0.0.1:8000/prophet';
 
   let navigate = useNavigate();
   const [tickerError, setTickerError] = useState(false);
@@ -52,14 +53,14 @@ function PredictForm() {
   };
 
   return (
-    <div className="card w-96 bg-base-100 shadow-2xl">
+    <div className="shadow-2xl card w-96 bg-base-100">
       <div className="card-body">
-        <h2 className="card-title text-2xl">Forcast your stock here!</h2>
+        <h2 className="text-2xl card-title">Forcast your stock here!</h2>
         <p className="text-sm text-gray-600">
           Just type in your stock ticker name and select the ML model you want
           to forecast with.
         </p>
-        <div className="card w-full p-4 bg-base-200 border-2 border-gray-300 shadow-xl">
+        <div className="w-full p-4 border-2 border-gray-300 shadow-xl card bg-base-200">
           <div className="card-body">
             <input
               type="text"
@@ -71,10 +72,10 @@ function PredictForm() {
               }
               onChange={(e) => setTicker(e.target.value.toUpperCase())}
             />
-            <select className="select select-primary w-full max-w-xs">
+            <select className="w-full max-w-xs select select-primary">
               <option selected value={'prophet'}>FB Prophet</option>
             </select>
-            <div className="card-actions justify-end align-bottom">
+            <div className="justify-end align-bottom card-actions">
               <button className="btn btn-primary" onClick={handlePredict}>
                 Predict
               </button>

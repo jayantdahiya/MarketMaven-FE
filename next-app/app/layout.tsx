@@ -21,9 +21,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className="min-h-screen antialiased">
-      {/* <div className="absolute top-6 right-6">
+      <div className="absolute top-6 right-6">
         <ModeToggle />
-      </div> */}
+      </div>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
