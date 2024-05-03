@@ -1,8 +1,12 @@
 import React from 'react'
 import { MainCard } from './Card'
 import { ModeToggle } from '@/components/theme-toggle'
+import { allTickers } from '@/db'
 
 const page = () => {
+
+  console.log(allTickers);
+  
   return (
     <div className='flex items-center justify-center h-screen'>
       <div className="fixed top-4 right-4 z-50">

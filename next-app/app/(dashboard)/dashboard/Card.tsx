@@ -23,17 +23,21 @@ import { ComboBox } from "./ComboBox"
 export function MainCard() {
   return (
     <Card className="w-[350px]">
+
       <CardHeader>
         <CardTitle>Market Maven</CardTitle>
         <CardDescription>Forecast your stocks</CardDescription>
       </CardHeader>
+      
       <CardContent>
         <form>
           <div className="grid items-center w-full gap-4">
+            {/* ticker name input */}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Name</Label>
               <ComboBox />
             </div>
+            {/* selection for prediction model */}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="framework">Forecasting Model</Label>
               <Select>
@@ -51,6 +55,7 @@ export function MainCard() {
           </div>
         </form>
       </CardContent>
+
       <CardFooter className="flex justify-between">
         <Button variant="outline">Reset</Button>
         <Button>Run</Button>
