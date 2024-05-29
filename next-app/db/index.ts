@@ -2,7 +2,7 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { tickers } from "./schema";
 
-const connectionString = "postgres://postgres.zwbhcfkvtlsncgvhpdpc:TittyBang@69@aws-0-ap-south-1.pooler.supabase.com:5432/postgres"
+const connectionString = process.env.DATABASE_URL;
 
 const client = postgres(connectionString);
 const db = drizzle(client);

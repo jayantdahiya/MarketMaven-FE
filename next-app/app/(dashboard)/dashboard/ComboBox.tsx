@@ -25,29 +25,26 @@ export function ComboBox() {
   const [value, setValue] = React.useState("")
   const [tickerSuggestions, setTickerSuggestions] = React.useState([])
 
-
-
-  const getStockList = async(value: string) => {
-    let config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${value}&apikey=NFX51318A80POPWT`,
-        headers: { }
-      };
-
-    await axios.request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-        setTickerSuggestions(response.data.bestMatches)
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
+  // const getStockList = async(value: string) => {
+  //   let config = {
+  //       method: 'get',
+  //       maxBodyLength: Infinity,
+  //       url: `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${value}&apikey=NFX51318A80POPWT`,
+  //       headers: { }
+  //     };
+  //   await axios.request(config)
+  //     .then((response) => {
+  //       console.log(JSON.stringify(response.data));
+  //       setTickerSuggestions(response.data.bestMatches)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  // }
 
   const getResult = async() => {
-      const result = await db.select().from(tickers);
-      console.log(result)
+      const result = await db.select().from(tickers)
+      console.log("tickers", result)
   }
 
   useEffect(() => {
@@ -56,7 +53,6 @@ export function ComboBox() {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-
       <PopoverTrigger asChild>
         <Button
           variant="outline"
