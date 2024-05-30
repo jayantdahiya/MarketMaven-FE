@@ -1,28 +1,29 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { AppContext } from "../App";
-import LineChart from '../Components/LineChart';
+import LineChart from "../Components/LineChart";
 
 // import {apiData} from '../Components/API_DATA';
 
 function Result() {
-  const { ticker, model, setTicker, responseData, setResponseData } = useContext(AppContext);
+  const { ticker, model, setTicker, responseData, setResponseData } =
+    useContext(AppContext);
   let navigate = useNavigate();
 
-  const handleGoBack = async() => {
-    setTicker('')
-    setResponseData('')
-    navigate('/')
-  }
+  const handleGoBack = async () => {
+    setTicker("");
+    setResponseData("");
+    navigate("/");
+  };
 
   useEffect(() => {
-    if(!ticker){
+    if (!ticker) {
       // setResponseData(apiData)
-      navigate('/')
+      navigate("/");
     }
-  }, [])
-  
+  }, []);
+
   if (responseData) {
     return (
       <div className="flex w-screen">
@@ -67,7 +68,10 @@ function Result() {
               </ul>
             </div>
             <div className="text-right">
-              <button className="btn btn-primary text-white" onClick={handleGoBack}>
+              <button
+                className="btn btn-primary text-white"
+                onClick={handleGoBack}
+              >
                 Go Back
               </button>
             </div>
@@ -75,13 +79,14 @@ function Result() {
         </div>
       </div>
     );
-    
   } else {
     return (
       <div className="flex justify-center h-screen w-screen">
         <div className="h-[350px] w-[700px] border-2 my-auto flex">
           <div className="m-auto">
-            <button className="btn loading disabled bg-transparent text-black border-none text-2xl lowercase">loading predictions...</button>
+            <button className="btn loading disabled bg-transparent text-black border-none text-2xl lowercase">
+              loading predictions...
+            </button>
           </div>
         </div>
       </div>
@@ -89,4 +94,4 @@ function Result() {
   }
 }
 
-export default Result
+export default Result;

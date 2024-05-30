@@ -1,5 +1,5 @@
-import React from 'react'
-import PredictForm from '../Components/PredictForm'
+import React from "react";
+import PredictForm from "../Components/PredictForm";
 
 function Landing() {
   return (
@@ -13,4 +13,4 @@ function Landing() {
   );
 }
 
-export default Landing
+export default Landing;

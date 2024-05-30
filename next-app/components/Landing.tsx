@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Card,
@@ -7,8 +7,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { MainForm } from "./MainForm";
+} from '@/components/ui/card';
+import { MainForm } from './MainForm';
 
 export function Landing() {
   return (
@@ -23,7 +23,9 @@ export function Landing() {
         <MainForm />
       </CardContent>
       <CardFooter>
-        <p className="text-xs font-thin">the app is currently under development*</p>
+        <p className="text-xs font-thin">
+          the app is currently under development*
+        </p>
       </CardFooter>
     </Card>
   );

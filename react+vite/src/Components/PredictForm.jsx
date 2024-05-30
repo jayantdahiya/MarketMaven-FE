@@ -1,55 +1,53 @@
-import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router';
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 
-import { AppContext } from '../App';
+import { AppContext } from "../App";
 
 function PredictForm() {
-  const {ticker, setTicker, setResponseData} = useContext(AppContext);
+  const { ticker, setTicker, setResponseData } = useContext(AppContext);
   // const apiUrl = import.meta.env.VITE_APP_URL;
-  const apiUrl = 'http://127.0.0.1:8000/prophet';
+  const apiUrl = "http://127.0.0.1:8000/prophet";
 
   let navigate = useNavigate();
   const [tickerError, setTickerError] = useState(false);
 
   const handlePredict = () => {
-    if(!ticker){
+    if (!ticker) {
       setTickerError(true);
-      alert('Please enter a valid ticker name');
+      alert("Please enter a valid ticker name");
     }
-    fetchPredictions()
-    navigate('/result')
-  }
+    fetchPredictions();
+    navigate("/result");
+  };
 
   const fetchPredictions = async () => {
     console.log("Fetch Predictions Triggered");
-      if (ticker) {
-        console.log("ticker found: ", ticker);
-        var config = {
-          method: "GET",
-          url: apiUrl,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-          params: {
-            ticker: ticker,
-          },
-        };
-        try {
-          console.log('Predicting....')
-          await axios(config).then((response) =>
-            setResponseData(response.data)
-          );
-          console.log('Predicted!')
-        } catch (error) {
-          console.log(error);
-          alert(`Axios Error: ${error}`, error.data);
-          navigate('/');
-        }
-      } else {
-        console.log("Please enter a ticker symbol");
+    if (ticker) {
+      console.log("ticker found: ", ticker);
+      var config = {
+        method: "GET",
+        url: apiUrl,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        params: {
+          ticker: ticker,
+        },
+      };
+      try {
+        console.log("Predicting....");
+        await axios(config).then((response) => setResponseData(response.data));
+        console.log("Predicted!");
+      } catch (error) {
+        console.log(error);
+        alert(`Axios Error: ${error}`, error.data);
+        navigate("/");
       }
+    } else {
+      console.log("Please enter a ticker symbol");
+    }
   };
 
   return (
@@ -64,7 +62,7 @@ function PredictForm() {
           <div className="card-body">
             <input
               type="text"
-              placeholder={tickerError? "Please enter ticker": "Ticker"}
+              placeholder={tickerError ? "Please enter ticker" : "Ticker"}
               className={
                 tickerError
                   ? "input input-bordered input-error w-full max-w-xs"
@@ -73,7 +71,9 @@ function PredictForm() {
               onChange={(e) => setTicker(e.target.value.toUpperCase())}
             />
             <select className="w-full max-w-xs select select-primary">
-              <option selected value={'prophet'}>FB Prophet</option>
+              <option selected value={"prophet"}>
+                FB Prophet
+              </option>
             </select>
             <div className="justify-end align-bottom card-actions">
               <button className="btn btn-primary" onClick={handlePredict}>
@@ -87,4 +87,4 @@ function PredictForm() {
   );
 }
 
-export default PredictForm
+export default PredictForm;

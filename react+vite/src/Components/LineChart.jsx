@@ -1,79 +1,79 @@
-import React, { useContext } from 'react'
-import Chart from 'react-apexcharts';
+import React, { useContext } from "react";
+import Chart from "react-apexcharts";
 
 // import { apiData } from './API_DATA';
-import { AppContext } from '../App';
+import { AppContext } from "../App";
 
 function LineChart() {
-    const {responseData} = useContext(AppContext);
-    let chartData = JSON.parse(responseData);
-    // console.log('Line Chart Data: ', chartData);
-    const series = [
-      {
-        name: "Price",
-        data: Object.keys(chartData).map((key) => chartData[key].trend)
+  const { responseData } = useContext(AppContext);
+  let chartData = JSON.parse(responseData);
+  // console.log('Line Chart Data: ', chartData);
+  const series = [
+    {
+      name: "Price",
+      data: Object.keys(chartData).map((key) => chartData[key].trend),
+    },
+  ];
+  const options = {
+    chart: {
+      type: "line",
+      zoom: {
+        enabled: true,
       },
-    ];
-    const options = {
-      chart: {
-        type: "line",
-        zoom: {
-          enabled: true,
-        },
+    },
+    colors: ["#0C37FA"],
+    dataLabels: {
+      enabled: false,
+    },
+    markers: {
+      size: [4, 4],
+    },
+    stroke: {
+      curve: "straight",
+    },
+    title: {
+      text: "Forecast Result",
+      align: "left",
+    },
+    grid: {
+      row: {
+        colors: ["#f3f3f3", "transparent"],
+        opacity: 0.5,
       },
-      colors: ["#0C37FA"],
-      dataLabels: {
-        enabled: false,
-      },
-      markers: {
-        size: [4, 4],
-      },
-      stroke: {
-        curve: "straight",
-      },
-      title: {
-        text: "Forecast Result",
-        align: "left",
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"],
-          opacity: 0.5,
-        },
-      },
-      xaxis: {
-        type: "datetime",
-        categories: Object.keys(chartData).map((key) =>
-          new Intl.DateTimeFormat("en-US", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-          }).format(chartData[key].ds)
-        ),
-      },
-    };
+    },
+    xaxis: {
+      type: "datetime",
+      categories: Object.keys(chartData).map((key) =>
+        new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(chartData[key].ds),
+      ),
+    },
+  };
 
   //Console logs of the api inputs/outputs
 
-    // console.log(
-    //   "Trends: ",
-    //   Object.keys(chartData).map((key) => chartData[key].trend)
-    // );
-    // console.log(
-    //   "Date from api: ",
-    //   Object.keys(chartData).map((key) => chartData[key].trend)
-    // );
-    // console.log(
-    //   "Converted Date: ",
-    //   Object.keys(chartData).map((key) =>
-    //     new Intl.DateTimeFormat("en-US", {
-    //       year: "numeric",
-    //       month: "2-digit",
-    //       day: "2-digit",
-    //     }).format(chartData[key].ds)
-    //   )
-    // );
-  
+  // console.log(
+  //   "Trends: ",
+  //   Object.keys(chartData).map((key) => chartData[key].trend)
+  // );
+  // console.log(
+  //   "Date from api: ",
+  //   Object.keys(chartData).map((key) => chartData[key].trend)
+  // );
+  // console.log(
+  //   "Converted Date: ",
+  //   Object.keys(chartData).map((key) =>
+  //     new Intl.DateTimeFormat("en-US", {
+  //       year: "numeric",
+  //       month: "2-digit",
+  //       day: "2-digit",
+  //     }).format(chartData[key].ds)
+  //   )
+  // );
+
   // **************************************
 
   return (
@@ -87,4 +87,4 @@ function LineChart() {
   );
 }
 
-export default LineChart
+export default LineChart;

@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from 'react';
 
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -8,27 +8,26 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { ComboBox } from "./ComboBox"
+} from '@/components/ui/select';
+import { ComboBox } from './ComboBox';
 
 export function MainCard() {
   return (
     <Card className="w-[350px]">
-
       <CardHeader>
         <CardTitle>Market Maven</CardTitle>
         <CardDescription>Forecast your stocks</CardDescription>
       </CardHeader>
-      
+
       <CardContent>
         <form>
           <div className="grid items-center w-full gap-4">
@@ -61,5 +60,5 @@ export function MainCard() {
         <Button>Run</Button>
       </CardFooter>
     </Card>
-  )
+  );
 }

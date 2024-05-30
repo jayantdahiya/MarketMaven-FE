@@ -1,17 +1,17 @@
-import React, {useState, createContext, useEffect} from 'react'
-import { Route, Routes } from 'react-router';
+import React, { useState, createContext, useEffect } from "react";
+import { Route, Routes } from "react-router";
 
-import bg from './assets/SVG/circuit-board.svg'
-import Landing from './Pages/Landing'
-import Result from './Pages/Result'
+import bg from "./assets/SVG/circuit-board.svg";
+import Landing from "./Pages/Landing";
+import Result from "./Pages/Result";
 
 export const AppContext = createContext();
 
 function App() {
-  const [theme, setTheme] = useState('corporate');
+  const [theme, setTheme] = useState("corporate");
   const [ticker, setTicker] = useState();
   const [responseData, setResponseData] = useState();
-  const [model, setModel] = useState('Prophet');
+  const [model, setModel] = useState("Prophet");
   return (
     <div
       data-theme={theme}
@@ -40,4 +40,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

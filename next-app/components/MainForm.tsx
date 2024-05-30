@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Check, ChevronsUpDown } from 'lucide-react';
 
-import axios from "axios";
+import axios from 'axios';
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -18,48 +18,48 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "@/components/ui/command";
+} from '@/components/ui/command';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 const models = [
   {
-    label: "Prophet",
-    value: "prophet",
+    label: 'Prophet',
+    value: 'prophet',
   },
   {
-    label: "LSTM",
-    value: "lstm",
+    label: 'LSTM',
+    value: 'lstm',
   },
   {
-    label: "ARIMA",
-    value: "arima",
+    label: 'ARIMA',
+    value: 'arima',
   },
 ] as const;
 
 const formSchema = z.object({
   ticker: z.string({
-    required_error: "Please select a ticker.",
+    required_error: 'Please select a ticker.',
   }),
   model: z.string({
-    required_error: "Please select a forecasting model.",
+    required_error: 'Please select a forecasting model.',
   }),
 });
 
@@ -69,20 +69,22 @@ interface TickerSuggestion {
 }
 
 export function MainForm() {
-  let [tickerSuggestions, setTickerSuggestions] = useState<TickerSuggestion[]>([]);
+  let [tickerSuggestions, setTickerSuggestions] = useState<TickerSuggestion[]>(
+    [],
+  );
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ticker: "",
-      model: ""
-    }
+      ticker: '',
+      model: '',
+    },
   });
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Proceed with submitting the form
-    console.log("Form submitted with values:", values);
+    console.log('Form submitted with values:', values);
   }
 
   const handleTickerChange = async (value: string) => {
@@ -90,16 +92,18 @@ export function MainForm() {
     if (value.length > 2) {
       try {
         const response = await axios.get(
-          `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${value}&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`
+          `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${value}&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`,
         );
         const data = response.data;
-        const transformedData: TickerSuggestion[] = data.bestMatches.map((entry: any) => ({
-          label: entry["2. name"],
-          value: entry["1. symbol"]
-        }));
+        const transformedData: TickerSuggestion[] = data.bestMatches.map(
+          (entry: any) => ({
+            label: entry['2. name'],
+            value: entry['1. symbol'],
+          }),
+        );
         setTickerSuggestions(transformedData);
       } catch (error) {
-        console.error("Error: ", error);
+        console.error('Error: ', error);
       }
     }
   };
@@ -119,42 +123,46 @@ export function MainForm() {
                       variant="outline"
                       role="combobox"
                       className={cn(
-                        "w-full justify-between",
-                        !field.value && "text-muted-foreground"
+                        'w-full justify-between',
+                        !field.value && 'text-muted-foreground',
                       )}
                       onChange={() => handleTickerChange(field.value)}
                     >
                       {field.value
-                        ? tickerSuggestions.find((ticker) => ticker.value === field.value)
-                            ?.label
-                        : "Select ticker"}
+                        ? tickerSuggestions.find(
+                            (ticker) => ticker.value === field.value,
+                          )?.label
+                        : 'Select ticker'}
                       <ChevronsUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
                 <PopoverContent className="w-full p-0">
                   <Command>
-                    <CommandInput placeholder="Search ticker..." onInputCapture={(e) => handleTickerChange(e.target.value)} />
+                    <CommandInput
+                      placeholder="Search ticker..."
+                      onInputCapture={(e) => handleTickerChange(e.target.value)}
+                    />
                     <CommandEmpty>No ticker found.</CommandEmpty>
                     <CommandGroup>
                       {tickerSuggestions?.map((ticker) => (
                         <CommandItem
-                        value={ticker.value}
-                        key={ticker.value}
-                        onSelect={() => {
-                          form.setValue("ticker", ticker.value);
-                        }}
-                      >
-                        <Check
-                          className={cn(
-                            "mr-2 h-4 w-4",
-                            ticker.value === field.value
-                              ? "opacity-100"
-                              : "opacity-0"
-                          )}
-                        />
-                        {ticker.label.substring(0,20) + ` ...`}
-                      </CommandItem>
+                          value={ticker.value}
+                          key={ticker.value}
+                          onSelect={() => {
+                            form.setValue('ticker', ticker.value);
+                          }}
+                        >
+                          <Check
+                            className={cn(
+                              'mr-2 h-4 w-4',
+                              ticker.value === field.value
+                                ? 'opacity-100'
+                                : 'opacity-0',
+                            )}
+                          />
+                          {ticker.label.substring(0, 20) + ` ...`}
+                        </CommandItem>
                       ))}
                     </CommandGroup>
                   </Command>

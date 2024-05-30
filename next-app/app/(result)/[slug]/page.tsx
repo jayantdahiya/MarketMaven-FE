@@ -1,16 +1,14 @@
-import React from 'react'
+import React from 'react';
 
 interface paramProps {
   params: {
-    slug: any
-  }
+    slug: any;
+  };
 }
 
-const page = ({params}: paramProps) => {
-  console.log(params.slug)
-  return (
-    <div>{params.slug}</div>
-  )
-}
+const page = ({ params }: paramProps) => {
+  console.log(params.slug);
+  return <div>{params.slug}</div>;
+};
 
-export default page
+export default page;
