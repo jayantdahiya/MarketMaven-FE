@@ -1,7 +1,9 @@
 'use client';
 
 import * as React from 'react';
-import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
+import { Check, ChevronsUpDown } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -16,23 +18,33 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import axios from 'axios';
-// import { db } from "@/db";
-// import { tickers } from "@/db/schema"
-import { useEffect } from 'react';
+
+interface tickers {
+  Name: string;
+  Symbol: string;
+  Sector: string;
+}
 
 export function ComboBox() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
-  const [tickerSuggestions, setTickerSuggestions] = React.useState([]);
+  const [tickers, setTickers] = React.useState([] as tickers[]);
 
-  const getStockList = async (value: string) => {
-    const response = await axios.get('http://127.0.0.1:8000/tickers', {
-      headers: {
-        Accept: 'application/json',
-      },
-    });
-    return response.data;
-  };
+  async function getTickers() {
+    axios
+      .get('http://localhost:8000/tickers')
+      .then((response) => {
+        console.log('tickers =', JSON.parse(response.data));
+        setTickers(JSON.parse(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  React.useEffect(() => {
+    getTickers();
+  }, []);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -41,46 +53,43 @@ export function ComboBox() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="justify-between w-full"
+          className="w-full justify-between"
         >
           {value
-            ? tickerSuggestions.find(
-                (framework) => framework['1. symbol'] === value,
-              )?.['2. name']
-            : 'Search stock...'}
-          <CaretSortIcon className="w-4 h-4 ml-2 opacity-50 shrink-0" />
+            ? tickers?.find(
+                (ticker) =>
+                  ticker.Symbol.toString().toLowerCase() ===
+                  value.toString().toLowerCase(),
+              )?.Name
+            : 'Select ticker...'}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
 
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput
-            placeholder="Search stock..."
-            className="h-9"
-            onValueChange={(value) => getStockList(value)}
-          />
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandInput placeholder="Search framework..." />
+          <CommandEmpty>No tickers found.</CommandEmpty>
 
           <CommandGroup>
-            {tickerSuggestions?.length === 0 ? (
-              <CommandEmpty>No results found.</CommandEmpty>
-            ) : (
-              tickerSuggestions?.map((framework) => (
-                <CommandItem
-                  key={framework['1. symbol']}
-                  value={framework['1. symbol']}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue);
-                    setOpen(false);
-                  }}
-                >
-                  {framework['2. name']}
-                  {value === framework['1. symbol'] && (
-                    <CheckIcon className="w-4 h-4 ml-auto opacity-100" />
+            {tickers?.map((ticker, index) => (
+              <CommandItem
+                key={index}
+                value={ticker.Symbol}
+                onSelect={(currentValue) => {
+                  setValue(currentValue === value ? '' : currentValue);
+                  setOpen(false);
+                }}
+              >
+                <Check
+                  className={cn(
+                    'mr-2 h-4 w-4',
+                    value === ticker.Symbol ? 'opacity-100' : 'opacity-0',
                   )}
-                </CommandItem>
-              ))
-            )}
+                />
+                {ticker.Name}
+              </CommandItem>
+            ))}
           </CommandGroup>
         </Command>
       </PopoverContent>
