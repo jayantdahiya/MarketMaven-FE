@@ -34,8 +34,7 @@ export function ComboBox() {
     axios
       .get('http://localhost:8000/tickers')
       .then((response) => {
-        console.log('tickers =', JSON.parse(response.data));
-        setTickers(JSON.parse(response.data));
+        setTickers(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -71,7 +70,7 @@ export function ComboBox() {
           <CommandInput placeholder="Search framework..." />
           <CommandEmpty>No tickers found.</CommandEmpty>
 
-          <CommandGroup>
+          <CommandGroup className="max-h-[300px] overflow-y-scroll overflow-x-hidden">
             {tickers?.map((ticker, index) => (
               <CommandItem
                 key={index}

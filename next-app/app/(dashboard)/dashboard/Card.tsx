@@ -20,6 +20,7 @@ import {
 import { ComboBox } from './ComboBox';
 
 export function MainCard() {
+  const models = ['FB Prophet', 'LSTM', 'ARIMA', 'XGBoost'];
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -43,10 +44,9 @@ export function MainCard() {
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent position="popper">
-                  <SelectItem value="next">FB Prophet</SelectItem>
-                  <SelectItem value="sveltekit">LSTM</SelectItem>
-                  <SelectItem value="astro">ARIMA</SelectItem>
-                  <SelectItem value="nuxt">XGBoost</SelectItem>
+                  {models.map((model, index) => {
+                    return <SelectItem key={index} value={model}>{model}</SelectItem>;
+                  })}
                 </SelectContent>
               </Select>
             </div>
