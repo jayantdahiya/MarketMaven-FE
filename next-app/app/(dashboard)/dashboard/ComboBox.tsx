@@ -57,8 +57,8 @@ export function ComboBox() {
           {value
             ? tickers?.find(
                 (ticker) =>
-                  ticker.Symbol.toString().toLowerCase() ===
-                  value.toString().toLowerCase(),
+                  ticker.Symbol.toLowerCase() ===
+                  value.toLowerCase(),
               )?.Name
             : 'Select ticker...'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

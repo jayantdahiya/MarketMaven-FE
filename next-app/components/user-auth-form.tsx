@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/components/ui/use-toast';
 import { Icons } from '@/components/icons';
+import axios from 'axios';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -27,22 +28,57 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   } = useForm<FormData>({
     resolver: zodResolver(userAuthSchema),
   });
+
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
   const searchParams = useSearchParams();
 
+  // async function onSubmit(data: FormData) {
+  //   setIsLoading(true);
+
+  //   const signInResult = await signIn('email', {
+  //     email: data.email.toLowerCase(),
+  //     redirect: false,
+  //     callbackUrl: searchParams?.get('from') || '/dashboard',
+  //   });
+
+  //   setIsLoading(false);
+
+  //   if (!signInResult?.ok) {
+  //     return toast({
+  //       title: 'Something went wrong.',
+  //       description: 'Your sign in request failed. Please try again.',
+  //       variant: 'destructive',
+  //     });
+  //   }
+
+  //   return toast({
+  //     title: 'Check your email',
+  //     description: 'We sent you a login link. Be sure to check your spam too.',
+  //   });
+  // }
+
   async function onSubmit(data: FormData) {
     setIsLoading(true);
 
-    const signInResult = await signIn('email', {
-      email: data.email.toLowerCase(),
-      redirect: false,
-      callbackUrl: searchParams?.get('from') || '/dashboard',
-    });
+    const signUpResult = await axios.post(
+      'http://127.0.0.1:8000/login',
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
 
-    setIsLoading(false);
+    console.log('signUpResult -> ', signUpResult.data.user.aud);
 
-    if (!signInResult?.ok) {
+    if (signUpResult.data.user.aud !== 'authenticated') {
+      setIsLoading(false);
       return toast({
         title: 'Something went wrong.',
         description: 'Your sign in request failed. Please try again.',
@@ -50,16 +86,23 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       });
     }
 
-    return toast({
-      title: 'Check your email',
-      description: 'We sent you a login link. Be sure to check your spam too.',
-    });
+    if (signUpResult.data.user.aud === 'authenticated') {
+      setIsLoading(false);
+
+      // set the session state to auth
+
+      return
+    }
+
+    setIsLoading(false);
   }
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
+
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">
               Email
@@ -80,24 +123,51 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               </p>
             )}
           </div>
+
+          <div className="grid gap-1">
+            <Label className="sr-only" htmlFor="email">
+              Password
+            </Label>
+            <Input
+              id="password"
+              placeholder="********"
+              type="password"
+              autoCapitalize="none"
+              autoComplete="current-password"
+              autoCorrect="off"
+              disabled={isLoading || isGitHubLoading}
+              {...register('password')}
+            />
+            {errors?.password && (
+              <p className="px-1 text-xs text-red-600">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
           <button className={cn(buttonVariants())} disabled={isLoading}>
             {isLoading && (
               <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
             )}
             Sign In with Email
           </button>
+        
         </div>
       </form>
+
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
+
         <div className="relative flex justify-center text-xs uppercase">
           <span className="px-2 bg-background text-muted-foreground">
             Or continue with
           </span>
         </div>
       </div>
+
+      {/* github login button */}
       <button
         type="button"
         className={cn(buttonVariants({ variant: 'outline' }))}
@@ -114,6 +184,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         )}{' '}
         Github
       </button>
+    
     </div>
   );
 }

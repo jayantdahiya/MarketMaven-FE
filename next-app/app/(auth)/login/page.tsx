@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <div className="container flex flex-col items-center justify-center w-screen h-screen">
+
       <Link
         href="/dashboard"
         className={cn(
@@ -26,6 +27,7 @@ export default function LoginPage() {
           Back
         </>
       </Link>
+      
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
@@ -45,6 +47,7 @@ export default function LoginPage() {
           </Link>
         </p>
       </div>
+      
     </div>
   );
 }
